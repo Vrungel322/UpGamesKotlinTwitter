@@ -48,4 +48,14 @@ dependencies {
 
   // rxandroid
   compile "io.reactivex.rxjava2:rxandroid:2.0.1"
+
+  //Depency Injection
+  kapt 'com.google.dagger:dagger-compiler:2.11'
+  compile 'com.google.dagger:dagger:2.11'
+  provided 'org.glassfish:javax.annotation:10.0-b28'
+
+  //MVP
+  compile 'com.arello-mobile:moxy:1.5.3'
+  compile 'com.arello-mobile:moxy-android:1.5.3'
+  kapt 'com.arello-mobile:moxy-compiler:1.5.3'
 }
