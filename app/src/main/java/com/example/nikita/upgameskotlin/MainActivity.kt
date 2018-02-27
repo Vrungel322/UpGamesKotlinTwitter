@@ -2,6 +2,7 @@ package com.example.nikita.upgameskotlin
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import io.reactivex.Observable
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
@@ -10,5 +11,7 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
     Timber.e("MainActivity kotlin")
+
+    Observable.just("MainActivity kotlin Observable").subscribe({ Timber.e(it) });
   }
 }
