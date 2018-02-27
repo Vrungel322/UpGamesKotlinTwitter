@@ -21,6 +21,9 @@ android {
     }
   }
 }
+kapt {
+  generateStubs = true
+}
 
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -33,6 +36,10 @@ dependencies {
 
   // Timber
   implementation 'com.jakewharton.timber:timber:4.6.1'
+
+  // Butterknife
+  compile 'com.jakewharton:butterknife:8.8.1'
+  kapt 'com.jakewharton:butterknife-compiler:8.8.1'
 
   // retrofit
   compile "com.squareup.retrofit2:retrofit:2.3.0"
