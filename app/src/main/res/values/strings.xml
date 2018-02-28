@@ -1,3 +1,7 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/tools">
   <string name="app_name">UpGamesKotlin</string>
+
+  <string name="com.twitter.sdk.android.CONSUMER_KEY">pmRtEhpmGF4fhxPWhOMMZ7bjV</string>
+  <string name="com.twitter.sdk.android.CONSUMER_SECRET">	KNwXo82bZhB2j5iU20O0pt2aj4uQusxHWiblu0KkQOS6BkPFX8
+</string>
 </resources>

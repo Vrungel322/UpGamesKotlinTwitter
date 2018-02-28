@@ -10,7 +10,7 @@ import javax.inject.Singleton
 /**
  * Created by nikita on 27.02.2018.
  */
-@Module
+@Module(includes = arrayOf(RetrofitModule::class))
 class AppModule(private val application: Application) {
   @Provides
   @Singleton

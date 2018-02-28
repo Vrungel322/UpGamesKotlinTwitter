@@ -14,12 +14,12 @@ import javax.inject.Inject
 abstract class BasePresenter<V : MvpView>() : MvpPresenter<V>() {
   @Inject lateinit var mDataManager: DataManager
 
+  private var mCompositeSubscribtion: CompositeSubscription = CompositeSubscription()
+
   override fun onFirstViewAttach() {
     super.onFirstViewAttach()
     Timber.e(mDataManager.getString());
   }
-
-  lateinit var mCompositeSubscribtion: CompositeSubscription
 
   init {
     init()
