@@ -1,6 +1,5 @@
 package com.example.nikita.upgameskotlin.main
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -14,11 +13,9 @@ import com.twitter.sdk.android.core.Callback
 import com.twitter.sdk.android.core.Result
 import com.twitter.sdk.android.core.TwitterException
 import com.twitter.sdk.android.core.TwitterSession
-import com.twitter.sdk.android.core.identity.TwitterAuthClient
 import com.twitter.sdk.android.core.identity.TwitterLoginButton
 import com.twitter.sdk.android.tweetcomposer.TweetComposer
 import timber.log.Timber
-
 
 
 class MainActivity : BaseActivity(), IMainActivityView {
@@ -33,7 +30,7 @@ class MainActivity : BaseActivity(), IMainActivityView {
     twitterButton.callback = object : Callback<TwitterSession>() {
       override fun success(result: Result<TwitterSession>) {
         Timber.e("twitter success")
-        requestEmailAddress(applicationContext, result.data)
+        mPresenter.requestEmailAddress(result.data)
       }
 
       override fun failure(exception: TwitterException) {
@@ -43,24 +40,17 @@ class MainActivity : BaseActivity(), IMainActivityView {
     }
   }
 
-  @OnClick(id.bSendPost) fun tvHelloWorldClicked(){
+  @OnClick(id.bSendPost)
+  fun tvHelloWorldClicked() {
     TweetComposer.Builder(applicationContext).show()
   }
 
-  private fun requestEmailAddress(context: Context, session: TwitterSession) {
-    TwitterAuthClient().requestEmail(session, object : Callback<String>() {
-      override fun success(result: Result<String>) {
-        Toast.makeText(context, result.data, Toast.LENGTH_SHORT).show()
-      }
-
-      override fun failure(exception: TwitterException) {
-        Toast.makeText(context, exception.message, Toast.LENGTH_SHORT).show()
-      }
-    })
+  override fun showToast(data: String?) {
+    Toast.makeText(applicationContext, data, Toast.LENGTH_SHORT).show()
   }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     super.onActivityResult(requestCode, resultCode, data)
-    twitterButton.onActivityResult(requestCode,resultCode,data)
+    twitterButton.onActivityResult(requestCode, resultCode, data)
   }
 }

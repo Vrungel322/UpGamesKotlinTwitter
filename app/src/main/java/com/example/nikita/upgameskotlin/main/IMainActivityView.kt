@@ -9,4 +9,5 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
  */
 @StateStrategyType(value = AddToEndSingleStrategy::class)
 interface IMainActivityView : MvpView {
+  fun showToast(data: String?)
 }
