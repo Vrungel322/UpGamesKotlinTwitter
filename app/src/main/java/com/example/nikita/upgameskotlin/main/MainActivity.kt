@@ -35,6 +35,7 @@ class MainActivity : BaseActivity(), IMainActivityView {
 
       override fun failure(exception: TwitterException) {
         Timber.e("twitter failure")
+        Timber.e("twitter failure " + exception.localizedMessage)
 
       }
     }
@@ -42,7 +43,7 @@ class MainActivity : BaseActivity(), IMainActivityView {
 
   @OnClick(id.bSendPost)
   fun tvHelloWorldClicked() {
-    TweetComposer.Builder(applicationContext).show()
+    TweetComposer.Builder(this).show()
   }
 
   override fun showToast(data: String?) {

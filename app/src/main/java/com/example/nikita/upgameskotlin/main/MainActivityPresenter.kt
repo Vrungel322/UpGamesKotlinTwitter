@@ -1,30 +1,38 @@
 package com.example.nikita.upgameskotlin.main
 
+import com.arellomobile.mvp.InjectViewState
 import com.example.nikita.upgameskotlin.AppUpGames
 import com.example.nikita.upgameskotlin.base.BasePresenter
-import com.twitter.sdk.android.core.Callback
-import com.twitter.sdk.android.core.Result
-import com.twitter.sdk.android.core.TwitterException
+import com.example.nikita.upgameskotlin.data.IRequestEmailListener
+import com.example.nikita.upgameskotlin.data.SocialManager
 import com.twitter.sdk.android.core.TwitterSession
-import com.twitter.sdk.android.core.identity.TwitterAuthClient
+import timber.log.Timber
+import javax.inject.Inject
 
 /**
  * Created by nikita on 28.02.2018.
  */
+@InjectViewState
 class MainActivityPresenter : BasePresenter<IMainActivityView>() {
+  @Inject lateinit var mSocailManager: SocialManager
+
   override fun init() {
     AppUpGames.sAppComponent.inject(this)
   }
 
-  fun requestEmailAddress( session: TwitterSession) {
-    TwitterAuthClient().requestEmail(session, object : Callback<String>() {
-      override fun success(result: Result<String>) {
-        viewState.showToast(result.data);
+  override fun onFirstViewAttach() {
+    super.onFirstViewAttach()
+    mSocailManager.requestEmailListener = object : IRequestEmailListener {
+      override fun showToast(data: String?) {
+        Timber.e(data)
+        viewState.showToast(data)
       }
-
-      override fun failure(exception: TwitterException) {
-        viewState.showToast(exception.message)
-      }
-    })
+    }
   }
+
+  fun requestEmailAddress(data: TwitterSession?) {
+    data?.let { mSocailManager.requestEmailAddress(it) }
+  }
+
+
 }
