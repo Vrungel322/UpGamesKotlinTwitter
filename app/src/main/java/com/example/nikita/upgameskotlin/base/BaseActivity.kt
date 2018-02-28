@@ -1,4 +1,4 @@
-package com.example.nikita.upgameskotlin
+package com.example.nikita.upgameskotlin.base
 
 import android.os.Bundle
 import butterknife.ButterKnife

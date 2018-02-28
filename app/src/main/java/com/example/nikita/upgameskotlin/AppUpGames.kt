@@ -11,11 +11,10 @@ import timber.log.Timber
  */
 class AppUpGames : Application() {
 
-  private var sAppComponent: AppComponent? = null
-
-  fun getAppComponent(): AppComponent? {
-    return sAppComponent
+  companion object {
+    lateinit var sAppComponent: AppComponent
   }
+
   override fun onCreate() {
     super.onCreate()
     sAppComponent = DaggerAppComponent.builder().appModule(AppModule(this)).build()

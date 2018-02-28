@@ -1,4 +1,4 @@
-package com.example.nikita.upgameskotlin
+package com.example.nikita.upgameskotlin.base
 
 import com.arellomobile.mvp.MvpPresenter
 import com.arellomobile.mvp.MvpView
