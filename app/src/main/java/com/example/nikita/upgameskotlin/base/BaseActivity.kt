@@ -7,9 +7,11 @@ import com.arellomobile.mvp.MvpActivity
 /**
  * Created by nikita on 27.02.2018.
  */
-open class BaseActivity : MvpActivity(){
+abstract class BaseActivity : MvpActivity(){
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     ButterKnife.bind(this)
+    setUpUi()
   }
+  abstract fun setUpUi()
 }

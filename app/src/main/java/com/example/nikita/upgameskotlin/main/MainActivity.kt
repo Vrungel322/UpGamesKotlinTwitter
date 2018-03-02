@@ -9,6 +9,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.nikita.upgameskotlin.R.id
 import com.example.nikita.upgameskotlin.R.layout
 import com.example.nikita.upgameskotlin.base.BaseActivity
+import com.example.nikita.upgameskotlin.timeline.TimeLineActivity
 import com.twitter.sdk.android.core.Callback
 import com.twitter.sdk.android.core.Result
 import com.twitter.sdk.android.core.TwitterException
@@ -20,13 +21,15 @@ import timber.log.Timber
 
 class MainActivity : BaseActivity(), IMainActivityView {
   @InjectPresenter lateinit var mPresenter: MainActivityPresenter
-  @BindView(id.tlbLogin) lateinit var twitterButton: TwitterLoginButton
 
+  @BindView(id.tlbLogin) lateinit var twitterButton: TwitterLoginButton
   /* вопросом помечаем, что может прийти null */
   override fun onCreate(savedInstanceState: Bundle?) {
     setContentView(layout.activity_main)
     super.onCreate(savedInstanceState)
+  }
 
+  override fun setUpUi() {
     twitterButton.callback = object : Callback<TwitterSession>() {
       override fun success(result: Result<TwitterSession>) {
         Timber.e("twitter success")
@@ -42,8 +45,13 @@ class MainActivity : BaseActivity(), IMainActivityView {
   }
 
   @OnClick(id.bSendPost)
-  fun tvHelloWorldClicked() {
+  fun bSendPostClicked() {
     TweetComposer.Builder(this).show()
+  }
+
+  @OnClick(id.bTimeLine)
+  fun bTimeLineClick() {
+    startActivity(Intent(this@MainActivity, TimeLineActivity::class.java))
   }
 
   override fun showToast(data: String?) {
